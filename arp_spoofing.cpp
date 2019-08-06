@@ -35,6 +35,7 @@ void arp_spoofing::ExecuteArpSpoofing(){
     MakeAttackPacket();
     while(loop){
         pcap_sendpacket(handle, AttackPacket->ToPacket60(), 60);
+        sleep(1);
     }
 
     pcap_close(handle);
