@@ -9,7 +9,7 @@ void sig_handler(int signo){
     printf("Turn off arpspoofing\n");
 }
 
-void arp_spoofing::ExecuteArpSpoofing(){
+void arp_spoofing::ExecuteArpSpoofing() {
     signal(SIGINT, sig_handler);
     Address* Mac = new Address(getinfo::get_my_mac_address(Dev),getinfo::get_my_ipv4_address());
     MakeRequestPacket(Mac);
@@ -55,7 +55,7 @@ void arp_spoofing::MakeAttackPacket(){
     Hardware* hard = new Hardware(hardType, 0x06);
     Protocol* prot = new Protocol(protType, 0x04);
 
-    Address* send = new Address(RequestPacket->GetEthernet()->GetSoruce(), conv::ipv4_to_hex("172.20.10.2"));
+    Address* send = new Address(RequestPacket->GetEthernet()->GetSoruce(), TargetIp);
     Address* trag = new Address(ReplyPacket->GetEthernet()->GetSoruce(), SenderIp);
 
     arp_header* arph = new arp_header(hard, prot, opcode, send, trag);
