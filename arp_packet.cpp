@@ -1,15 +1,5 @@
 #include "arp_packet.h"
 
-arp_packet* arp_spoofing::GetRequestPacket(){
-    return RequestPacket;
-}
-arp_packet* arp_spoofing::GetReplyPacket(){
-    return ReplyPacket;
-}
-arp_packet* arp_spoofing::GetAttackPacket(){
-    return AttackPacket;
-}
-
 arp_packet::arp_packet(const u_char* packet){
     Ether = new ethernet_header(&packet[0], &packet[6], &packet[12]);
     Arp = new arp_header(&packet[14]);
@@ -40,5 +30,11 @@ u_char* arp_packet::ToPacket() {
     u_char* packet = new u_char[42];
     memcpy(&packet[0], Ether->ToPacket(), 14);
     memcpy(&packet[14], Arp->ToPacket(), 28);
+    return packet;
+}
+
+u_char* arp_packet::ToPacket60(){
+    u_char* packet = new u_char[60]{0, };
+    memcpy(packet, ToPacket(), 42);
     return packet;
 }

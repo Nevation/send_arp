@@ -9,13 +9,6 @@ public:
     arp_spoofing(const char* dev, u_char* sender, u_char* target,
                  struct arp_packet* request, struct arp_packet* reply, struct arp_packet* attack);
     void ExecuteArpSpoofing();
-    arp_packet* MakeArpPacket(Address* attacker);
-    u_char* GetSenderIp();
-    u_char* GetTargetIp();
-    struct arp_packet* GetRequestPacket();
-    struct arp_packet* GetReplyPacket();
-    struct arp_packet* GetAttackPacket();
-    void MakeAttackPacket();
 private:
     char* Dev;
     char* AttackerIp;
@@ -24,5 +17,13 @@ private:
     struct arp_packet* RequestPacket;
     struct arp_packet* ReplyPacket;
     struct arp_packet* AttackPacket;
-    void GetTargetMac();
+
+    void MakeRequestPacket(Address* attacker);
+    void MakeAttackPacket();
+    u_char* GetSenderIp();
+    u_char* GetTargetIp();
+    struct arp_packet* GetRequestPacket();
+    struct arp_packet* GetReplyPacket();
+    struct arp_packet* GetAttackPacket();
 };
+

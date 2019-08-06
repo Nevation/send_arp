@@ -8,6 +8,6 @@ int main(int argc, char* argv[]){
 
     struct arp_spoofing* ArpSpoofing = new arp_spoofing(argv[1], argv[2], argv[3]);
     ArpSpoofing->ExecuteArpSpoofing();
-
+    delete ArpSpoofing;
     return 0;
 }
